@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mulit Phone Number</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style type="text/css">
+
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            width: 500px;
+            background-color: #f4f4f4;
+            box-shadow: 0 5px 10px #999;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .form-group{
+            display: block;
+        }
+
+        .form-control{
+            width: 87%;
+            font-size: 15px;
+            border: 1px solid #999;
+            border-radius: 8px;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .addbtn, .removebtn{
+            color: #fff;
+            font-size: 12px;
+            background-color: green;
+            border-radius: 8px;
+            text-decoration: none;
+
+            padding: 8px 10px;
+            margin: 5px 10px;
+        }
+
+        .removebtn{
+            background-color: red;
+        }
+
+    </style>
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <h3>Mulit Phone Numbers</h3>
+
+        <form action="" method="">
+
+            <div class="form-group phonenumbers">
+                <label for="phones">Enter Your Mobile Numbers</label>
+                <input type="text" name="phones[]" id="phones" class="form-control" /><a href="javascript:void(0)" class="addbtn"><i class="fas fa-plus"></i></a>
+            </div>
+
+        </form>
+
+    </div>
+
+   
+
+    <script src="./libs/jquery-3.6.0.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            // console.log("hi");
+
+            var maxnumber = 5;
+            var addbtn = $(".addbtn");
+            var phonebox = $(".phonenumbers");
+            var newphoneel;
+            var x = 1;
+
+            //ADD
+
+            $(addbtn).click(function(){
+                // console.log("iam working")
+
+                if( x < maxnumber){
+                    x++;
+
+                    newphoneel = ` <div><input type="text" name="phones[]" id="phones${x}" class="form-control" /><a href="javascript:void(0)" class="removebtn"><i class="fas fa-trash-alt"></i></a></div>`;
+
+                    $(phonebox).append(newphoneel);
+
+
+                }else{
+                    $(this).html(`<i class="fas fa-trash-alt"></i>`);
+
+                    $(this).addClass(".removebtn");
+                    $(this).css({
+                        "background-color":"red"
+                    });
+                }
+            });
+
+
+            //Remove
+
+            $(phonebox).on("click",".removebtn",function(){
+                // console.log("hi");
+
+                $(this).parent().remove();
+                x--;
+
+                if(x < 5){
+                    $(addbtn).html(`<i class="fas fa-plus"></i>`);
+                    $(addbtn).css({
+                        "background-color":"green"
+                    });
+                }
+                
+            });
+
+
+        });
+
+
+    </script>
+</body>
+</html>
